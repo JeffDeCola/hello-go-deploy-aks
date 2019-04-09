@@ -1,0 +1,173 @@
+# hello-go-deploy-amazon-ec2 pipeline.yml
+
+jobs:
+
+- name: job-readme-github-pages
+  plan:
+  - get: hello-go-deploy-amazon-ec2
+    trigger: true
+  - put: resource-slack-alert
+    params:
+      channel: '#jeff-builds'
+      text: "From hello-go-deploy-amazon-ec2: STARTED job-readme-github-pages in concourse ci."
+  - put: resource-repo-status
+    params: { state: "pending", description: "STARTED job-readme-github-pages in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+  - task: task-readme-github-pages
+    file: hello-go-deploy-amazon-ec2/ci/tasks/task-readme-github-pages.yml
+    on_success:
+      do:
+      - put: hello-go-deploy-amazon-ec2
+        params:
+          repository: hello-go-deploy-amazon-ec2-updated  
+      - put: resource-slack-alert
+        params:
+          channel: '#jeff-builds'
+          text: "From hello-go-deploy-amazon-ec2: PASSED job-readme-github-pages in concourse ci."
+      - put: resource-repo-status
+        params: { state: "success", description: "PASSED job-readme-github-pages in concourse ci", commit: "hello-go-deploy-amazon-ec2" }
+    on_failure:
+      do:
+      - put: resource-slack-alert
+        params:
+          channel: '#jeff-builds'
+          text: "From hello-go-deploy-amazon-ec2: FAILED job-readme-github-pages in concourse ci."
+      - put: resource-repo-status
+        params: { state: "failure", description: "FAILED job-readme-github-pages in concourse ci", commit: "hello-go-deploy-amazon-ec2" }
+
+- name: job-unit-tests
+  plan:
+  - get: hello-go-deploy-amazon-ec2
+    trigger: true
+    passed: [job-readme-github-pages]
+  - put: resource-slack-alert
+    params:
+      channel: '#jeff-builds'
+      text: "From hello-go-deploy-amazon-ec2: STARTED job-unit-tests in concourse ci."
+  - put: resource-repo-status
+    params: { state: "pending", description: "STARTED job-unit-tests in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+  - task: task-unit-tests
+    file: hello-go-deploy-amazon-ec2/ci/tasks/task-unit-tests.yml
+    on_success:
+      do:
+      - put: hello-go-deploy-amazon-ec2
+        params:
+          repository: hello-go-deploy-amazon-ec2  
+      - put: resource-slack-alert
+        params:
+          channel: '#jeff-builds'
+          text_file: coverage-results/test_coverage.txt
+          text: |
+            From hello-go-deploy-amazon-ec2: PASSED job-unit-tests in concourse ci. 
+            $TEXT_FILE_CONTENT
+      - put: resource-repo-status
+        params: { state: "success", description: "PASSED job-unit-tests in concourse ci", commit: "hello-go-deploy-amazon-ec2" }
+    on_failure:
+      do:
+      - put: resource-slack-alert
+        params:
+          channel: '#jeff-builds'
+          text: "From hello-go-deploy-amazon-ec2: FAILED job-unit-tests in concourse ci."
+      - put: resource-repo-status
+        params: { state: "failure", description: "FAILED job-unit-tests in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+
+- name: job-build-push
+  plan:
+    - get: hello-go-deploy-amazon-ec2
+      trigger: true
+      passed: [job-unit-tests]
+    - put: resource-slack-alert
+      params:
+        channel: '#jeff-builds'
+        text: "From hello-go-deploy-amazon-ec2: STARTED job-build-push in concourse ci."
+    - put: resource-repo-status
+      params: { state: "pending", description: "STARTED job-build-push in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+    - task: task-build-push
+      file: hello-go-deploy-amazon-ec2/ci/tasks/task-build-push.yml
+    - put: resource-dump-to-dockerhub
+      params: { build: "dist"}
+      on_success:
+        do:
+        - put: resource-slack-alert
+          params:
+            channel: '#jeff-builds'
+            text: "From hello-go-deploy-amazon-ec2: PASSED job-build-push in concourse ci."
+        - put: resource-repo-status
+          params: { state: "pending", description: "PASSED job-build-push in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+      on_failure:
+        do:
+        - put: resource-slack-alert
+          params:
+            channel: '#jeff-builds'
+            text: "From hello-go-deploy-amazon-ec2: FAILED job-build-push in concourse ci."
+        - put: resource-repo-status
+          params: { state: "failure", description: "FAILED job-build-push in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+
+- name: job-deploy
+  plan:
+    - get: hello-go-deploy-amazon-ec2
+      trigger: true
+      passed: [job-build-push]
+    - put: resource-slack-alert
+      params:
+        channel: '#jeff-builds'
+        text: "From hello-go-deploy-amazon-ec2: STARTED job-deploy in concourse ci."
+    - put: resource-repo-status
+      params: { state: "pending", description: "STARTED job-deploy in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+    - task: task-deploy
+      file: hello-go-deploy-amazon-ec2/ci/tasks/task-deploy.yml
+      on_success:
+        do:
+        - put: resource-slack-alert
+          params:
+            channel: '#jeff-builds'
+            text: "From hello-go-deploy-amazon-ec2: PASSED job-deploy in concourse ci."
+        - put: resource-repo-status
+          params: { state: "success", description: "PASSED job-deploy in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+      on_failure:
+        do:
+        - put: resource-slack-alert
+          params:
+            channel: '#jeff-builds'
+            text: "From hello-go-deploy-amazon-ec2: FAILED job-deploy in concourse ci."
+        - put: resource-repo-status
+          params: { state: "failure", description: "FAILED job-deploy in concourse ci.", commit: "hello-go-deploy-amazon-ec2" }
+
+resource_types:
+
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+- name: github-status
+  type: docker-image
+  source:
+    repository: dpb587/github-status-resource
+    tag: master
+
+resources:
+
+- name: hello-go-deploy-amazon-ec2
+  type: git
+  source:
+    #uri: https://github.com/jeffdecola/hello-go-deploy-amazon-ec2
+    uri: git@github.com:jeffdecola/hello-go-deploy-amazon-ec2.git
+    branch: master
+    private_key: {{git_private_key}}
+- name: resource-dump-to-dockerhub
+  type: docker-image
+  source:
+    repository: jeffdecola/hello-go-deploy-amazon-ec2
+    tag: latest
+    username: jeffdecola
+    password: {{dockerhub_password}}
+- name: resource-slack-alert
+  type: slack-notification
+  source:
+    url: {{slack_url}} 
+- name: resource-repo-status 
+  type: github-status
+  source:
+    repository: jeffdecola/hello-go-deploy-amazon-ec2 
+    access_token: {{repo_github_token}}
+    

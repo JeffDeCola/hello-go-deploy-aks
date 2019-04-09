@@ -1,0 +1,17 @@
+# hello-go-deploy-amazon-ec2 task-deploy.yml
+
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: golang
+    tag: 1.11
+
+inputs:
+- name: hello-go-deploy-amazon-ec2
+
+run:
+  path: ./hello-go-deploy-amazon-ec2/ci/scripts/deploy.sh
+  # args: [-debug]
+
