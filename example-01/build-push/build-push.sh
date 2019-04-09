@@ -1,5 +1,5 @@
 #!/bin/sh -e
-# hello-go-deploy-amazon-ec2 build-push.sh
+# hello-go-deploy-aks build-push.sh
 
 echo " "
 
@@ -35,11 +35,11 @@ cd build-push
 echo " "
 
 echo "Build your docker image from binary /bin/hello-go using /build-push/Dockerfile"
-docker build -t jeffdecola/hello-go-deploy-amazon-ec2 .
+docker build -t jeffdecola/hello-go-deploy-aks .
 echo " "
 
 echo "Assuming you are logged in, lets push your built docker image to DockerHub"
-docker push jeffdecola/hello-go-deploy-amazon-ec2
+docker push jeffdecola/hello-go-deploy-aks
 echo " "
 
 echo "************************************************************************"

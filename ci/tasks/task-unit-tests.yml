@@ -1,4 +1,4 @@
-# hello-go-deploy-amazon-ec2 task-unit-tests.yml
+# hello-go-deploy-aks task-unit-tests.yml
 
 platform: linux
 
@@ -9,12 +9,12 @@ image_resource:
     tag: 1.11
 
 inputs:
-- name: hello-go-deploy-amazon-ec2
+- name: hello-go-deploy-aks
 
 outputs:
 - name: coverage-results
 
 run:
-  path: ./hello-go-deploy-amazon-ec2/ci/scripts/unit-tests.sh
+  path: ./hello-go-deploy-aks/ci/scripts/unit-tests.sh
   # args: [-debug]
   
