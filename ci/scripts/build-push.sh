@@ -1,5 +1,5 @@
 #!/bin/sh
-# hello-go-deploy-amazon-ec2 build-push.sh
+# hello-go-deploy-aks build-push.sh
 
 echo " "
 
@@ -21,7 +21,7 @@ echo "The goal is to create a binary and place in /dist directory with a Dockerf
 echo "The concourse pipeline will build and push the docker image to DockerHub"
 echo " "
 echo "At start, you should be in a /tmp/build/xxxxx directory with two folders:"
-echo "   /hello-go-deploy-amazon-ec2"
+echo "   /hello-go-deploy-aks"
 echo "   /dist (created in task-build-push.yml task file)"
 echo " "
 
@@ -36,14 +36,14 @@ echo "Setup the GOPATH based on current directory"
 export GOPATH=$PWD
 echo " "
 
-echo "Now we must move our code from the current directory ./hello-go-deploy-amazon-ec2 to" 
-echo "$GOPATH/src/github.com/JeffDeCola/hello-go-deploy-amazon-ec2"
+echo "Now we must move our code from the current directory ./hello-go-deploy-aks to" 
+echo "$GOPATH/src/github.com/JeffDeCola/hello-go-deploy-aks"
 mkdir -p src/github.com/JeffDeCola/
-cp -R ./hello-go-deploy-amazon-ec2 src/github.com/JeffDeCola/.
+cp -R ./hello-go-deploy-aks src/github.com/JeffDeCola/.
 echo " "
 
-echo "cd src/github.com/JeffDeCola/hello-go-deploy-amazon-ec2/example-01"
-cd src/github.com/JeffDeCola/hello-go-deploy-amazon-ec2/example-01
+echo "cd src/github.com/JeffDeCola/hello-go-deploy-aks/example-01"
+cd src/github.com/JeffDeCola/hello-go-deploy-aks/example-01
 echo " "
 
 echo "Check that you are set and everything is in the right place for go:"
@@ -60,11 +60,11 @@ cd "$GOPATH/dist"
 echo " "
 
 echo "cp the binary into /dist"
-cp "$GOPATH/src/github.com/JeffDeCola/hello-go-deploy-amazon-ec2/example-01/bin/hello-go" .
+cp "$GOPATH/src/github.com/JeffDeCola/hello-go-deploy-aks/example-01/bin/hello-go" .
 echo " "
 
 echo "cp the Dockerfile into /dist"
-cp "$GOPATH/src/github.com/JeffDeCola/hello-go-deploy-amazon-ec2/example-01/build-push/Dockerfile" .
+cp "$GOPATH/src/github.com/JeffDeCola/hello-go-deploy-aks/example-01/build-push/Dockerfile" .
 echo " "
 
 echo "Make it executable by all - chmod +x"

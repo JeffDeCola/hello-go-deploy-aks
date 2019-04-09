@@ -1,8 +1,8 @@
-# hello-go-deploy-amazon-ec2 Dockerfile used to build docker image
+# hello-go-deploy-aks Dockerfile used to build docker image
 
 FROM alpine
 
-LABEL Jeff DeCola (https://github.com/JeffDeCola/hello-go-deploy-amazon-ec2)
+LABEL Jeff DeCola (https://github.com/JeffDeCola/hello-go-deploy-aks)
 
 # Put the binary into the container
 COPY hello-go /

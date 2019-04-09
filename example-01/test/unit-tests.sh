@@ -1,5 +1,5 @@
 #!/bin/sh -e
-# hello-go-deploy-amazon-ec2 unit-tests.sh
+# hello-go-deploy-aks unit-tests.sh
 
 echo " "
 
