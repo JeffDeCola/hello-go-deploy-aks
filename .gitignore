@@ -2,10 +2,10 @@
 .credentials.yml
 
 // Ignore all binaries
-bin/*
+*/bin/*
 
 // Ignore test coverage
-test/test_converage.txt
+*/test/test_converage.txt
 
 // Ignore binary used for build
-build-push/hello-go
+*/build-push/hello-go
