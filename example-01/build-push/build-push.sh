@@ -38,8 +38,20 @@ echo "Build your docker image from binary /bin/hello-go using /build-push/Docker
 docker build -t jeffdecola/hello-go-deploy-aks .
 echo " "
 
+echo "Image size"
+docker images jeffdecola/hello-go-deploy-aks:latest
+echo " "
+
 echo "Assuming you are logged in, lets push your built docker image to DockerHub"
 docker push jeffdecola/hello-go-deploy-aks
+echo " "
+
+echo "Useful commands:"
+echo "     docker run --name hello-go-deploy-aks -dit jeffdecola/hello-go-deploy-aks"
+echo "     docker exec -i -t hello-go-deploy-aks /bin/bash"
+echo "     docker logs hello-go-deploy-aks"
+echo "     docker images"
+echo "     docker ps"
 echo " "
 
 echo "************************************************************************"
