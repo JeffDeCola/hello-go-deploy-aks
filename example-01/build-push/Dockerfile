@@ -1,10 +1,10 @@
 # hello-go-deploy-aks Dockerfile used to build docker image
 
-# Multistage Build to create a small docker image.
+# Multi-stage build to create a small docker image
 
-################################
-# STEP 1 build executable binary
-################################
+#################################
+# STAGE 1 build executable binary
+#################################
 
 FROM golang:alpine AS builder
 
@@ -25,9 +25,9 @@ RUN go get -d -v
 # Build the binary.
 RUN go build -o /go/bin/hello-go-deploy-aks main.go
 
-##############################
-# STEP 2 build a smaller image
-##############################
+###############################
+# STAGE 2 build a smaller image
+###############################
 
 FROM alpine
 
