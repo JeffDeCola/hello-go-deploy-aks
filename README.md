@@ -40,6 +40,7 @@ Table of Contents,
 * [STEP 2 - BUILD (DOCKER IMAGE VIA DOCKERFILE)](https://github.com/JeffDeCola/hello-go-deploy-aks#step-2---build-docker-image-via-dockerfile)
 * [STEP 3 - PUSH (TO DOCKERHUB)](https://github.com/JeffDeCola/hello-go-deploy-aks#step-3---push-to-dockerhub)
 * [STEP 4 - DEPLOY](https://github.com/JeffDeCola/hello-go-deploy-aks#step-4---deploy)
+* [CONTINUOUS INTEGRATION & DEPLOYMENT](https://github.com/JeffDeCola/hello-go-deploy-aks#continuous-integration--deployment)
 
 Documentation and references,
 
@@ -174,3 +175,9 @@ in concourse.
 ## STEP 4 - DEPLOY
 
 tbd
+
+## CONTINUOUS INTEGRATION & DEPLOYMENT
+
+Refer to
+[ci-README.md](https://github.com/JeffDeCola/hello-go-deploy-aks/blob/master/ci-README.md)
+for how I automated the above process.
