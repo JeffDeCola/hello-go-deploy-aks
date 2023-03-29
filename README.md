@@ -1,19 +1,22 @@
-# hello-go-deploy-aks
+# HELLO GO DEPLOY AKS
+
+[![Tag Latest](https://img.shields.io/github/v/tag/jeffdecola/hello-go-deploy-aks)](https://github.com/JeffDeCola/hello-go-deploy-aks/tags)
+[![Go Reference](https://pkg.go.dev/badge/github.com/JeffDeCola/hello-go-deploy-aks.svg)](https://pkg.go.dev/github.com/JeffDeCola/hello-go-deploy-aks)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JeffDeCola/hello-go-deploy-aks)](https://goreportcard.com/report/github.com/JeffDeCola/hello-go-deploy-aks)
+[![codeclimate Maintainability](https://api.codeclimate.com/v1/badges/ce328e08ef7038607b16/maintainability)](https://codeclimate.com/github/JeffDeCola/hello-go-deploy-aks/maintainability)
+[![codeclimate Issue Count](https://codeclimate.com/github/JeffDeCola/hello-go-deploy-aks/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/hello-go-deploy-aks/issues)
+[![Docker Pulls](https://badgen.net/docker/pulls/jeffdecola/hello-go-deploy-aks?icon=docker&label=pulls)](https://hub.docker.com/r/jeffdecola/hello-go-deploy-aks/)
+[![MIT License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
+[![jeffdecola.com](https://img.shields.io/badge/website-jeffdecola.com-blue)](https://jeffdecola.com)
 
 ```text
 *** THE DEPLOY IS UNDER CONSTRUCTION - CHECK BACK SOON ***
 ```
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/JeffDeCola/hello-go-deploy-aks)](https://goreportcard.com/report/github.com/JeffDeCola/hello-go-deploy-aks)
-[![GoDoc](https://godoc.org/github.com/JeffDeCola/hello-go-deploy-aks?status.svg)](https://godoc.org/github.com/JeffDeCola/hello-go-deploy-aks)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ce328e08ef7038607b16/maintainability)](https://codeclimate.com/github/JeffDeCola/hello-go-deploy-aks/maintainability)
-[![Issue Count](https://codeclimate.com/github/JeffDeCola/hello-go-deploy-aks/badges/issue_count.svg)](https://codeclimate.com/github/JeffDeCola/hello-go-deploy-aks/issues)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://jeffdecola.mit-license.org)
+_Deploy a "hello-world" docker image to
+Microsoft Azure Kubernetes Service (aks)._
 
-_Test, build, push (to DockerHub) and deploy
-a long running "hello-world" Docker Image to Microsoft Azure Kubernetes Service (aks)._
-
-I also have other repos showing different deployments,
+Other Services
 
 * PaaS
   * [hello-go-deploy-aws-elastic-beanstalk](https://github.com/JeffDeCola/hello-go-deploy-aws-elastic-beanstalk)
@@ -31,7 +34,7 @@ I also have other repos showing different deployments,
   * [hello-go-deploy-azure-vm](https://github.com/JeffDeCola/hello-go-deploy-azure-vm)
   * [hello-go-deploy-gce](https://github.com/JeffDeCola/hello-go-deploy-gce)
 
-Table of Contents,
+Table of Contents
 
 * [PREREQUISITES](https://github.com/JeffDeCola/hello-go-deploy-aks#prerequisites)
 * [EXAMPLES](https://github.com/JeffDeCola/hello-go-deploy-aks#examples)
@@ -42,16 +45,16 @@ Table of Contents,
 * [STEP 4 - DEPLOY](https://github.com/JeffDeCola/hello-go-deploy-aks#step-4---deploy)
 * [CONTINUOUS INTEGRATION & DEPLOYMENT](https://github.com/JeffDeCola/hello-go-deploy-aks#continuous-integration--deployment)
 
-Documentation and references,
+Documentation and Reference
 
-* The `hello-go-deploy-aks`
-  [Docker Image](https://hub.docker.com/r/jeffdecola/hello-go-deploy-aks)
+* The
+  [hello-go-deploy-aks docker image](https://hub.docker.com/r/jeffdecola/hello-go-deploy-aks)
   on DockerHub
-
-[GitHub Webpage](https://jeffdecola.github.io/hello-go-deploy-aks/)
-_built with
-[concourse ci](https://github.com/JeffDeCola/hello-go-deploy-aks/blob/master/ci-README.md)_
-
+* This repos
+  [github webpage](https://jeffdecola.github.io/hello-go-deploy-aks/)
+  _built with
+  [concourse](https://github.com/JeffDeCola/hello-go-deploy-aks/blob/master/ci-README.md)_
+  
 ## PREREQUISITES
 
 For this exercise I used go.  Feel free to use a language of your choice,
