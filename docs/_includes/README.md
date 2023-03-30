@@ -103,7 +103,7 @@ docker logs hello-go-deploy-aks
 docker rm -f hello-go-deploy-aks
 ```
 
-## STEP 3 - PUSH (TO PLACEHOLDER)
+## STEP 3 - PUSH (TO DOCKERHUB)
 
 You must be logged in to DockerHub,
 
