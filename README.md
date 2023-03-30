@@ -33,7 +33,7 @@ Other Services
   * [hello-go-deploy-amazon-ec2](https://github.com/JeffDeCola/hello-go-deploy-amazon-ec2)
   * [hello-go-deploy-azure-vm](https://github.com/JeffDeCola/hello-go-deploy-azure-vm)
   * [hello-go-deploy-gce](https://github.com/JeffDeCola/hello-go-deploy-gce)
-  
+
 Table of Contents
 
 * [OVERVIEW](https://github.com/JeffDeCola/hello-go-deploy-aks#overview)
