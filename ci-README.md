@@ -1,26 +1,26 @@
-# CONCOURSE CONTINUOUS INTEGRATION
+# CONCOURSE CONTINUOUS INTEGRATION & DEPLOYMENT
 
-I use concourse ci to,
+I use concourse to automate,
 
-* Copy and edit `README.md` to `/docs/_includes/README.md` for
+* Use README for
   [GitHub Webpage](https://jeffdecola.github.io/hello-go-deploy-aks/)
 * TEST code
 * BUILD docker image
 * PUSH to dockerhub
-* DEPLOY to gce
+* DEPLOY to aks
 * Alert me of the progress via repo status and slack
 
 ## PIPELINE
 
 The concourse
 [pipeline.yml](https://github.com/JeffDeCola/hello-go-deploy-aks/blob/master/ci/pipeline.yml)
-shows the entire ci flow. Visually, it looks like,
+shows the entire ci flow,
 
 ![IMAGE - hello-go-deploy-aks concourse ci pipeline - IMAGE](docs/pics/hello-go-deploy-aks-pipeline.jpg)
 
 ## JOBS, TASKS AND RESOURCE TYPES
 
-The concourse `jobs` and `tasks` are,
+Concourse Jobs and Tasks
 
 * `job-readme-github-pages` runs task
   [task-readme-github-pages.yml](https://github.com/JeffDeCola/hello-go-deploy-aks/blob/master/ci/tasks/task-readme-github-pages.yml)
@@ -39,21 +39,17 @@ The concourse `jobs` and `tasks` are,
   that kicks off shell script
   [deploy.sh](https://github.com/JeffDeCola/hello-go-deploy-aks/tree/master/ci/scripts/deploy.sh)
 
-The concourse `resources types` are,
+Concourse Resources
 
 * `hello-go-deploy-aks` uses a resource type
-  [docker-image](https://hub.docker.com/r/concourse/git-resource/)
+  [docker image](https://hub.docker.com/r/concourse/git-resource/)
   to PULL a repo from github
 * `resource-dump-to-dockerhub` uses a resource type
-  [docker-image](https://hub.docker.com/r/concourse/docker-image-resource/)
-  to PUSH a docker image to dockerhub.
+  [docker image](https://hub.docker.com/r/concourse/docker-image-resource/)
+  to PUSH a docker image to dockerhub
 * `resource-slack-alert` uses a resource type
   [docker image](https://hub.docker.com/r/cfcommunity/slack-notification-resource)
   that will notify slack on your progress
 * `resource-repo-status` uses a resource type
-  [docker image](https://hub.docker.com/r/dpb587/github-status-resource)
+  [docker image](https://hub.docker.com/r/jeffdecola/github-status-resource-clone)
   that will update your git status for that particular commit
-
-For more information on using concourse for continuous integration,
-refer to my
-[concourse-cheat-sheet](https://github.com/JeffDeCola/my-cheat-sheets/tree/master/software/operations/continuous-integration-continuous-deployment/concourse-cheat-sheet).

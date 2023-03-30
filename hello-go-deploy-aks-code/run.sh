@@ -1,29 +1,30 @@
 #!/bin/sh -e
-# hello-go-deploy-aks build.sh
+# hello-go-deploy-aks run.sh
 
 echo " "
 
 if [ "$1" = "-debug" ]
 then
     echo "************************************************************************"
-    echo "* build.sh -debug (START) **********************************************"
+    echo "* run.sh -debug (START) ************************************************"
     echo "************************************************************************"
-    # set -x enables a mode of the shell where all executed commands are printed to the terminal.
+    # set -x enables a mode of the shell where all executed commands
+    # are printed to the terminal.
     set -x
     echo " "
 else
     echo "************************************************************************"
-    echo "* build.sh (START) *****************************************************"
+    echo "* run.sh (START) *******************************************************"
     echo "************************************************************************"
     echo " "
 fi
 
-echo "Create a binary hello-go in /bin"
-echo "    Kick off executable with ./hello.go"
-go build -o hello-go ../main.go
+echo "go run main.go"
+echo " "
+go run main.go
 echo " "
 
 echo "************************************************************************"
-echo "* build.sh (END) *******************************************************"
+echo "* run.sh (END) **************************************************"
 echo "************************************************************************"
 echo " "
