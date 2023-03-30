@@ -1,4 +1,9 @@
-#!/bin/bash
-# hello-go-deploy-aks destroy-pipeline.sh
+#!/bin/sh
+# crypto-miner-manager destroy-pipeline.sh
 
-fly -t ci destroy-pipeline --pipeline hello-go-deploy-aks
+echo " "
+echo "Destroy pipeline on target jeffs-ci-target which is team jeffs-ci-team"
+fly --target jeffs-ci-target \
+    destroy-pipeline \
+    --pipeline crypto-miner-manager
+echo " "
